@@ -3,6 +3,7 @@
 
 #[tokio::main]
 async fn main() {
+    api().await;
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![api])
         .run(tauri::generate_context!())
@@ -15,10 +16,10 @@ use crate::status::StatusResponse;
 
 #[tauri::command]
 async fn api() -> StatusResponse {
-    let data: Result<StatusResponse, std::io::Error> = status("mc.hypixel.net", 25565).await;
+    let data: Result<StatusResponse, std::io::Error> = status("survival.limeskey.com", 25565).await;
     println!("{:?}", data);
     match data {
         Ok(data) => data,
-        Err(_) => panic!("hi")
+        Err(_) => {panic!("hi");}
     }
 }
