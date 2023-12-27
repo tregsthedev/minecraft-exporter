@@ -7,9 +7,20 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![api])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+async fn api () {
+    use mc_query::status;
+    use tokio::io::Result;
+
+    let data = status("mc.hypixel.net", 25565).await?;
+    println!("{data:#?}");
+
+    Ok(())
 }
