@@ -3,6 +3,8 @@
   let playerCount = 2;
   let data = '';
   let serverName = ''
+  let minPlayerCount = 0
+  let motd = '';
 
   import { invoke } from '@tauri-apps/api/tauri';
 
@@ -12,6 +14,9 @@
       data = JSON.parse(message)
       serverName = data.version.name
       let {version, players } = data
+      minPlayerCount = data.players.max
+      playerCouunt = data.players.online
+      motd = data.motd.text
 
 
 
@@ -25,21 +30,26 @@
 </script>
 
 <div class="header">
-<h1> Minecraft Server Stats </h1>
+<center> <h1> Minecraft Server Stats </h1> </center>
 <h1 class="title"> Server Name: {serverName} </h1>
+<h4> {motd} </h4>
 <center> <input>  </center>
 
 </div>
 
 
-<h3> <span class="server-name"> servername </span> </h3>
+<h3> <span class="server-name"> Server Stats </span> </h3>
 <p>
-<span class="player-count"> player count: </span> {playerCount}
-hi
+
+<span class="player-count">  max player count: </span> {playerCount}
+<br>
+<span> total player count: {minPlayerCount} </span>
 </p>
 
-<h2> hi {name} </h2>
 
+{#if name == " Purpur 1.20.1"}
+	<p>{count} is greater than 10</p>
+{/if}
 <style>
 h1 {
 color: blue;
