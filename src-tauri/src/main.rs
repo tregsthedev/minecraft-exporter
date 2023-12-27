@@ -11,15 +11,15 @@ async fn main() {
 }
 
 use mc_query::status;
-use serde::Serialize;
-use crate::status::StatusResponse;
+use serde_json;
 
 #[tauri::command]
-async fn api() -> StatusResponse {
-    let data: Result<StatusResponse, std::io::Error> = status("survival.limeskey.com", 25565).await;
+async fn api() -> String {
+    let data = status("survival.limeskey.com", 25565).await;
     println!("{:?}", data);
     match data {
-        Ok(data) => data,
-        Err(_) => {panic!("hi");}
+        Ok(data) => serde_json::to_string(&data).unwrap(),
+        Err(_) => panic!("hi"),
+
     }
 }
