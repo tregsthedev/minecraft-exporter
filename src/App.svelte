@@ -10,7 +10,7 @@
     try {
       message = await invoke('api')
       data = JSON.parse(message)
-      name = data.players.max
+      serverName = data.version.name
       let {version, players } = data
 
 
@@ -25,11 +25,13 @@
 </script>
 
 <div class="header">
-<h1 class="title"> Server: {serverName} </h1>
+<h1> Minecraft Server Stats </h1>
+<h1 class="title"> Server Name: {serverName} </h1>
+<center> <input>  </center>
 
 </div>
 
-<h1>Hello world! {message}</h1>
+
 <h3> <span class="server-name"> servername </span> </h3>
 <p>
 <span class="player-count"> player count: </span> {playerCount}
@@ -37,3 +39,9 @@ hi
 </p>
 
 <h2> hi {name} </h2>
+
+<style>
+h1 {
+color: blue;
+}
+</style>
