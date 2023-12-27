@@ -10,10 +10,15 @@ async fn main() {
 }
 
 use mc_query::status;
+use serde::Serialize;
 use crate::status::StatusResponse;
 
 #[tauri::command]
-async fn api() -> Result<StatusResponse, Error> {
-    let data = status("mc.hypixel.net", 25565).await;
-    data
+async fn api() -> StatusResponse {
+    let data: Result<StatusResponse, std::io::Error> = status("mc.hypixel.net", 25565).await;
+    println!("{:?}", data);
+    match data {
+        Ok(data) => data,
+        Err(_) => panic!("hi")
+    }
 }
