@@ -8,6 +8,7 @@
     } catch (error) {
       console.error('Error occurred:', error);
     }
+    console.log(message);
   }
 
   fetchMessage();
