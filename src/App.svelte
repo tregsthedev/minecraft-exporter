@@ -12,10 +12,15 @@
     try {
       message = await invoke('api')
       data = JSON.parse(message)
+      // @ts-ignore
       serverName = data.version.name
+      // @ts-ignore
       let {version, players } = data
+      // @ts-ignore
       minPlayerCount = data.players.max
-      playerCouunt = data.players.online
+      // @ts-ignore
+      playerCount = data.players.online
+      // @ts-ignore
       motd = data.motd.text
 
 
@@ -41,9 +46,9 @@
 <h3> <span class="server-name"> Server Stats </span> </h3>
 <p>
 
-<span class="player-count">  max player count: </span> {playerCount}
+<span class="player-count">Max player count: </span> {playerCount}
 <br>
-<span> total player count: {minPlayerCount} </span>
+<span>Total player count: {minPlayerCount} </span>
 </p>
 
 
